@@ -9,6 +9,7 @@
 
 import torch
 import torchvision
+import numpy as np
 import matplotlib.pyplot as plt
 
 from cifar10_nn.networks import LeNet, MLPNet
@@ -21,7 +22,7 @@ class Inferencer(object):
                                  transform=torchvision.transforms.Compose([
                                    torchvision.transforms.ToTensor(),
                                    torchvision.transforms.Normalize(
-                                     (0.5, 0.5, 0.5), (0.5, 0.5, 0.5)))
+                                     (0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
                                  ])),
             batch_size=batch_size, shuffle=True)
         self.classes = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
@@ -59,6 +60,6 @@ class Inferencer(object):
         self.network.eval()
 
 if __name__ == "__main__":
-    network = MLPNet()
+    network = LeNet()
     inferencer = Inferencer(batch_size = 64, network = network)
     inferencer.display_6predictions()
